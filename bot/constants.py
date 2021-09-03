@@ -2,6 +2,11 @@ import os
 from pathlib import Path
 from typing import NamedTuple
 
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
 
 class Client(NamedTuple):
     token = os.environ.get("BOT_TOKEN")
