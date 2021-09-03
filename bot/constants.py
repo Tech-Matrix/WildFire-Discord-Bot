@@ -4,8 +4,7 @@ from typing import NamedTuple
 
 
 class Client(NamedTuple):
-    # token = os.environ.get("BOT_TOKEN")
-    token = "ODgzMDIyOTM1MTY4Nzk0NjQ2.YTD5MQ.hqicEdG0Tu9jfJR_-We8XunIQu4"
+    token = os.environ.get("BOT_TOKEN")
     extensions = Path("bot", "exts").glob('**/*.py')
 
 
