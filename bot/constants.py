@@ -1,11 +1,13 @@
 import os
+from contextlib import suppress
 from pathlib import Path
 from typing import NamedTuple
 
-from dotenv import load_dotenv
 
-
-load_dotenv()
+with suppress(ImportError):
+    # No docker.
+    from dotenv import load_dotenv
+    load_dotenv()
 
 
 class Client(NamedTuple):
