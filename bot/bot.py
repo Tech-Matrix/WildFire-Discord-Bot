@@ -1,6 +1,5 @@
 import logging
 import os
-from pathlib import Path
 from typing import Callable, Iterable, Union
 
 import hikari
@@ -26,6 +25,7 @@ class Bot(lightbulb.Bot):
             prefix=prefix,
             intents=hikari.Intents.ALL,
             insensitive_commands=True,
+            ignore_bots=True,
             **kwargs,
         )
 
@@ -44,8 +44,14 @@ class Bot(lightbulb.Bot):
 
     async def on_starting(self, _event: hikari.StartingEvent) -> None:
         """Load extensions when bot is starting."""
+        logging.info("Loading extensions...")
+
         for ext in Client.extensions:
-            self.load_extension(str(ext).replace(os.sep, ".")[:-3])
+            ext = str(ext).replace(os.sep, ".")[:-3]
+            self.load_extension(ext)
+            logging.info(f"{ext}: Loaded")
+
+        logging.info("Done loading extensions.")
 
     async def on_started(self, _event: hikari.StartedEvent) -> None:
         """Notify dev-logs."""
