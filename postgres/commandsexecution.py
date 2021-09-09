@@ -6,8 +6,9 @@ example_id="63560579770220554"
 try:
     con = psycopg2.connect(
         host = "localhost",
-        database="test",
-        user = "postgres"
+        database="postgres",
+        user = "postgres",
+        password="mysecretpassword"
     )
 
 #cursor 
@@ -16,6 +17,7 @@ try:
 except Exception as err:
     cur=None
     print("\npsycopg2 error:",err)
+    sys.exit()
 
 if cur != None:
     print("\n connection succesful:",con,"\n")
@@ -24,13 +26,14 @@ table_name="offences"
 sql_statement="SELECT COUNT(*) FROM  offences WHERE offences.id = {};".format(example_id)\
 
 try:
-    sql_object=sql.SQL(sql_statement).format(sql.Identifier(table_name))
-    cur.execute(sql_object)
+    #sql_object=sql.SQL(sql_statement).format(sql.Identifier(table_name))
+    cur.execute(sql_statement)
 #if user id and server already exists, add to num_of_offences
     count=cur.fetchall()
 
     if(count>0):
         cur.execute("UPDATE offences SET num_of_offences = num_of_offences+1 WHERE id= '263560579770220554'")
+
 except Exception as err:
     print("cursor.execute() ERROR:",err)
     con.rollback()
@@ -61,3 +64,5 @@ cur.close()
 
 #close the connection
 con.close()
+#create function with try except
+#read file for table creation
