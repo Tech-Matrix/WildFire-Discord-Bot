@@ -6,11 +6,12 @@ CREATE TABLE IF NOT EXISTS offences (
 
 CREATE TABLE IF NOT EXISTS filter (
     server_id BIGINT NOT NULL,
+    filter_identifier VARCHAR(256) NOT NULL,
     filter_pattern VARCHAR(256) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS prefixes (
-    server_id BIGINT NOT NULL,
+    server_id BIGINT NOT NULL PRIMARY KEY,
     prefix VARCHAR(16) NOT NULL
 );
 
