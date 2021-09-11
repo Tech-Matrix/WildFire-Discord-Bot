@@ -48,7 +48,10 @@ def predict(vectorizer, content: str):
 
     s = loaded_model.predict(c)
     if not s[0]:
+        # non offensive
         return False
+
+    # Offensive
     return True
 
     # if s[0] == 0:
