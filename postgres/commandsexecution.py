@@ -16,6 +16,12 @@ async def main():
     data = f.read().replace('\n', '')
     await conn.execute(data)
     await conn.close()
+
+async def fetch_from_db(connection, sql_statement):
+    row=connection.fetchrow(sql_statement)
+    return row
+    
+  # return whatever connection.fetch(sql_statement) gives
 asyncio.get_event_loop().run_until_complete(main())
 #connect to the db 
 #try:
