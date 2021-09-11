@@ -1,7 +1,7 @@
 import logging
 
 import lightbulb
-from lightbulb.errors import CheckFailure
+from lightbulb.errors import CheckFailure, NotEnoughArguments
 from lightbulb.events import CommandErrorEvent
 
 from bot.bot import Bot
@@ -17,6 +17,10 @@ class ErrorHandler(lightbulb.Plugin):
         """Error handler."""
         if isinstance(event.exception, CheckFailure):
             await event.context.respond("You do not have the permissions to run this command!")
+
+        elif isinstance(event.exception, NotEnoughArguments):
+            await event.context.respond("Not enough arguments!")
+
         else:
             raise event.exception
 
