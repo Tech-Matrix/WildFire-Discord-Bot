@@ -13,6 +13,7 @@ with suppress(ImportError):
 class Client(NamedTuple):
     token = os.environ.get("BOT_TOKEN")
     extensions = Path("bot", "exts").glob('**/*.py')
+    database_url = os.environ.get("DATABASE_URL")
 
 
 class Channels(NamedTuple):
