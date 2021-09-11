@@ -1,12 +1,15 @@
+import asyncio
 import logging
 import os
 from typing import Callable, Iterable, Union
 
+import asyncpg
 import hikari
 import lightbulb
 
 from bot.constants import Channels, Client
 from model import train
+from postgres import init_db
 
 
 logger = logging.getLogger(__name__)  # Required additional setup.
@@ -17,7 +20,11 @@ class Bot(lightbulb.Bot):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
+        self.loop = asyncio.get_event_loop()
+
         self.dev_logs: hikari.GuildTextChannel = ...
+
+        self.db_conn: asyncpg.Connection = ...
         self.vectorizer = train()
 
     @classmethod
@@ -46,6 +53,9 @@ class Bot(lightbulb.Bot):
 
     async def on_starting(self, _event: hikari.StartingEvent) -> None:
         """Load extensions when bot is starting."""
+        logging.info("Connecting to database...")
+        self.db_conn = await init_db()
+
         logging.info("Loading extensions...")
 
         for ext in Client.extensions:
