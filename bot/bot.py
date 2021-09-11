@@ -6,6 +6,7 @@ import hikari
 import lightbulb
 
 from bot.constants import Channels, Client
+from model import train
 
 
 logger = logging.getLogger(__name__)  # Required additional setup.
@@ -17,6 +18,7 @@ class Bot(lightbulb.Bot):
         super().__init__(*args, **kwargs)
 
         self.dev_logs: hikari.GuildTextChannel = ...
+        self.vectorizer = train()
 
     @classmethod
     def create(cls, token: str, *, prefix: Union[Callable, Iterable, str], **kwargs) -> "Bot":
