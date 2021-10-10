@@ -1,5 +1,8 @@
-# ib-7 project
-Icebreaker project, team 7.
+# WildFire-Discord Bot
+
+Video Link: https://drive.google.com/drive/folders/1p6UIyd1uQh9eCCpmvZtZAFplHAmh-yYv
+
+Medium Link: https://medium.com/newolf-society/wildfire-a-bot-to-keep-your-server-interactions-friendly-142b1a30114b
 
 
 ## Development
